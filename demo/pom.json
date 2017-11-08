@@ -1,0 +1,24 @@
+{
+	"Name": "pxnNettet-Demo",
+	"ArtifactId": "nettet-demo",
+	"GroupId": "com.poixson.nettet",
+	"Version": "1.0.0",
+	"URL": "http://poixson.com",
+	"Github-Path": "GrowControl/pxnNettet",
+	"Org-Name": "PoiXson",
+	"Main-Class": "com.poixson.nettet.demo.Main",
+	"Shade": "yes",
+	"Deps": {
+		"pxnCommon": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common",
+			"Name": "pxnCommon",
+			"Version": "3.6.1"
+		},
+		"nettet": {
+			"GroupId": "com.poixson.nettet",
+			"ArtifactId": "nettet",
+			"Version": "1.0.0"
+		}
+	}
+}
