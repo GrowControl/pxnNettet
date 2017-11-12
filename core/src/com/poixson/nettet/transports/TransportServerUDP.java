@@ -1,8 +1,6 @@
 package com.poixson.nettet.transports;
 
-import com.poixson.nettet.Transport;
 
-
-public class TransportServerUDP implements Transport {
+public class TransportServerUDP implements TransportServer {
 
 }
