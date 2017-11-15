@@ -7,6 +7,11 @@
 	"Github-Path": "GrowControl/pxnNettet",
 	"Org-Name": "PoiXson",
 	"Deps": {
+		"jUnixSocket": {
+			"GroupId": "no.fiken.oss.junixsocket",
+			"ArtifactId": "junixsocket-common",
+			"Version": "1.0.2"
+		},
 		"pxnCommon": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common",

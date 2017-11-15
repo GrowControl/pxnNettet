@@ -9,6 +9,16 @@
 	"Main-Class": "com.poixson.nettet.demo.Main",
 	"Shade": "yes",
 	"Deps": {
+		"jUnixSocket": {
+			"GroupId": "no.fiken.oss.junixsocket",
+			"ArtifactId": "junixsocket-common",
+			"Version": "1.0.2"
+		},
+		"jUnixSocket-natives": {
+			"GroupId": "no.fiken.oss.junixsocket",
+			"ArtifactId": "junixsocket-native-common",
+			"Version": "1.0.2"
+		},
 		"pxnCommon": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common",

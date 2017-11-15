@@ -1,4 +1,4 @@
-<!-- Generated on: November 8, 2017 22:50 UTC -->
+<!-- Generated on: November 15, 2017 23:01 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -32,6 +32,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+		<jUnixSocket-version>1.0.2</jUnixSocket-version>
+		<jUnixSocket-natives-version>1.0.2</jUnixSocket-natives-version>
 		<pxnCommon-version>3.6.1</pxnCommon-version>
 		<nettet-version>1.0.0</nettet-version>
 
@@ -179,6 +181,16 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>no.fiken.oss.junixsocket</groupId>
+			<artifactId>junixsocket-common</artifactId>
+			<version>${jUnixSocket-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>no.fiken.oss.junixsocket</groupId>
+			<artifactId>junixsocket-native-common</artifactId>
+			<version>${jUnixSocket-natives-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common</artifactId>
