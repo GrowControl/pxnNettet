@@ -1,4 +1,4 @@
-package com.poixson.nettet;
+package com.poixson.nettet.transports;
 
 import java.io.IOException;
 

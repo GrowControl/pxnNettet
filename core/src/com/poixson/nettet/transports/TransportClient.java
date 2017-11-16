@@ -2,7 +2,6 @@ package com.poixson.nettet.transports;
 
 import java.io.IOException;
 
-import com.poixson.nettet.Transport;
 import com.poixson.utils.xCloseable;
 
 
