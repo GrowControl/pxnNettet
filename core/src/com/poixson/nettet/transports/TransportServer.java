@@ -13,6 +13,11 @@ public abstract class TransportServer implements Transport, xCloseableMany {
 
 
 
+	public TransportServer() {
+	}
+
+
+
 	public abstract void Bind() throws IOException;
 
 	@Override

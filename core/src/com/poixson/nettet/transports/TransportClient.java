@@ -9,6 +9,11 @@ public abstract class TransportClient implements Transport, xCloseable {
 
 
 
+	public TransportClient() {
+	}
+
+
+
 	public abstract void Connect() throws IOException;
 
 	@Override

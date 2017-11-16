@@ -34,6 +34,7 @@ public class TransportClientUDP extends TransportClient {
 			final String localAddrStr, final int localPort,
 			final String remoteAddrStr, final int remotePort)
 			throws IOException {
+		super();
 		if (Utils.isEmpty(remoteAddrStr))
 			throw new RequiredArgumentException("remoteAddrStr");
 		if (localPort  <= 0) throw new RequiredArgumentException("localPort");
@@ -61,6 +62,7 @@ public class TransportClientUDP extends TransportClient {
 			final InetSocketAddress localAddr,
 			final InetSocketAddress remoteAddr)
 			throws IOException {
+		super();
 		if (remoteAddr == null) throw new RequiredArgumentException("remoteAddr");
 		this.localAddr  = (
 			localAddr == null

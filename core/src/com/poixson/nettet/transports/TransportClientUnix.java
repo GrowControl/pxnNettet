@@ -22,6 +22,7 @@ public class TransportClientUnix extends TransportClient {
 
 	public TransportClientUnix(final String socketPath)
 			throws IOException {
+		super();
 		if (Utils.isEmpty(socketPath)) throw new RequiredArgumentException("socketPath");
 		this.socketPath = socketPath;
 		this.socketFile = new File(socketPath);

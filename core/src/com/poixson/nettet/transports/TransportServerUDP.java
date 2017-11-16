@@ -28,6 +28,7 @@ public class TransportServerUDP extends TransportServer {
 	}
 	public TransportServerUDP(final SocketAddress listenAddress)
 			throws IOException {
+		super();
 		if (listenAddress == null) throw new RequiredArgumentException("listenAddress");
 		this.listenAddress = listenAddress;
 		this.serverChannel = DatagramChannel.open();
