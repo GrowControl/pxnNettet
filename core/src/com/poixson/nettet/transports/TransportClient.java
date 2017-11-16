@@ -6,15 +6,19 @@ import com.poixson.nettet.Transport;
 import com.poixson.utils.xCloseable;
 
 
-public interface TransportClient extends Transport, xCloseable {
+public abstract class TransportClient implements Transport, xCloseable {
 
 
-	public void Connect() throws IOException;
+
+	public abstract void Connect() throws IOException;
 
 	@Override
-	public void close();
+	public abstract void close() throws IOException;
+
 	@Override
-	public boolean isClosed();
+	public abstract boolean isClosed();
+	public abstract boolean isConnected();
+
 
 
 }
