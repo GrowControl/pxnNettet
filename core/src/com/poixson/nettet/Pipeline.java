@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import com.poixson.utils.Utils;
 
 
-public abstract class PipelineFactory implements Pipe<byte[], Boolean> {
+public abstract class Pipeline implements Pipe<byte[], Boolean> {
 
 	protected final LinkedList<Pipe<?, ?>> pipes =
 			new LinkedList<Pipe<?, ?>>();
@@ -15,11 +15,11 @@ public abstract class PipelineFactory implements Pipe<byte[], Boolean> {
 
 
 
-	public PipelineFactory(final Pipe<?, ?>...pipes) {
+	public Pipeline(final Pipe<?, ?>...pipes) {
 		this();
 		this.addLast(pipes);
 	}
-	public PipelineFactory() {
+	public Pipeline() {
 	}
 
 
@@ -58,7 +58,7 @@ public abstract class PipelineFactory implements Pipe<byte[], Boolean> {
 
 
 
-	public PipelineFactory addFirst(final Pipe<?, ?>...pipes) {
+	public Pipeline addFirst(final Pipe<?, ?>...pipes) {
 		if (Utils.isEmpty(pipes))
 			return this;
 		final LinkedList<Pipe<?, ?>> list =
@@ -73,7 +73,7 @@ public abstract class PipelineFactory implements Pipe<byte[], Boolean> {
 		}
 		return this;
 	}
-	public PipelineFactory addLast(final Pipe<?, ?>...pipes) {
+	public Pipeline addLast(final Pipe<?, ?>...pipes) {
 		if (Utils.isEmpty(pipes))
 			return this;
 		for (final Pipe<?, ?> pipe : pipes) {

@@ -1,6 +1,6 @@
 package com.poixson.nettet.demo;
 
-import com.poixson.nettet.PipelineFactory;
+import com.poixson.nettet.Pipeline;
 import com.poixson.nettet.pipelines.PipelineDump;
 import com.poixson.nettet.pipelines.PipelineJSONStream;
 import com.poixson.nettet.pipelines.PipelineString;
@@ -19,7 +19,7 @@ public class Main {
 		// process shell arguments
 		final ShellArgsTool argsTool = ShellArgsTool.init(argsArray);
 
-		final PipelineFactory pipeFactory = new PipelineFactory() {
+		final Pipeline pipeFactory = new Pipeline() {
 			@Override
 			public void doInitPipes() {
 				this.addLast(
