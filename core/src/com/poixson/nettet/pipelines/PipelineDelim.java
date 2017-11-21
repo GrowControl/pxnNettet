@@ -1,14 +1,14 @@
 package com.poixson.nettet.pipelines;
 
-import com.poixson.nettet.Pipeline;
+import com.poixson.nettet.Pipe;
 import com.poixson.utils.Utils;
 import com.poixson.utils.xString;
 
 
-public class PipelineDelim implements Pipeline<String, String> {
+public class PipelineDelim implements Pipe<String, String> {
 
-	protected Pipeline<?, String> parent = null;
-	protected Pipeline<String, ?> child  = null;
+	protected Pipe<?, String> parent = null;
+	protected Pipe<String, ?> child  = null;
 
 	protected final xString buffer = xString.get();
 
@@ -23,10 +23,10 @@ public class PipelineDelim implements Pipeline<String, String> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setParentChild(
-			final Pipeline<?, ?> parent,
-			final Pipeline<?, ?> child) {
-		this.parent = (Pipeline<?, String>) parent;
-		this.child  = (Pipeline<String, ?>) child;
+			final Pipe<?, ?> parent,
+			final Pipe<?, ?> child) {
+		this.parent = (Pipe<?, String>) parent;
+		this.child  = (Pipe<String, ?>) child;
 	}
 	@Override
 	public Class<String> getEncodedType() {

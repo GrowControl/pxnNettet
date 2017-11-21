@@ -1,15 +1,15 @@
 package com.poixson.nettet;
 
 
-public interface Pipeline<E, D> { // encoded, decoded
+public interface Pipe<E, D> { // encoded, decoded
 
 
 	public Class<? extends E> getEncodedType();
 	public Class<? extends D> getDecodedType();
 
 	public void setParentChild(
-			final Pipeline<?, ?> parent,
-			final Pipeline<?, ?> child);
+			final Pipe<?, ?> parent,
+			final Pipe<?, ?> child);
 
 	public void readMessage (final E msg);
 	public void writeMessage(final D msg);

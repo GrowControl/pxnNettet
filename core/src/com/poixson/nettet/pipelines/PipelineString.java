@@ -1,14 +1,14 @@
 package com.poixson.nettet.pipelines;
 
-import com.poixson.nettet.Pipeline;
+import com.poixson.nettet.Pipe;
 import com.poixson.utils.StringUtils;
 import com.poixson.utils.Utils;
 
 
-public class PipelineString implements Pipeline<byte[], String> {
+public class PipelineString implements Pipe<byte[], String> {
 
-	protected Pipeline<?, byte[]> parent = null;
-	protected Pipeline<String, ?> child  = null;
+	protected Pipe<?, byte[]> parent = null;
+	protected Pipe<String, ?> child  = null;
 
 
 
@@ -20,10 +20,10 @@ public class PipelineString implements Pipeline<byte[], String> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setParentChild(
-			final Pipeline<?, ?> parent,
-			final Pipeline<?, ?> child) {
-		this.parent = (Pipeline<?, byte[]>) parent;
-		this.child  = (Pipeline<String, ?>) child;
+			final Pipe<?, ?> parent,
+			final Pipe<?, ?> child) {
+		this.parent = (Pipe<?, byte[]>) parent;
+		this.child  = (Pipe<String, ?>) child;
 	}
 	@Override
 	public Class<byte[]> getEncodedType() {

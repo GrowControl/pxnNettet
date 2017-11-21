@@ -1,12 +1,12 @@
 package com.poixson.nettet.pipelines;
 
-import com.poixson.nettet.Pipeline;
+import com.poixson.nettet.Pipe;
 import com.poixson.utils.Dumper;
 
 
-public class PipelineDump implements Pipeline<Object, Boolean> {
+public class PipelineDump implements Pipe<Object, Boolean> {
 
-	protected Pipeline<?, Object>  parent = null;
+	protected Pipe<?, Object>  parent = null;
 
 
 
@@ -18,10 +18,10 @@ public class PipelineDump implements Pipeline<Object, Boolean> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setParentChild(
-			final Pipeline<?, ?> parent,
-			final Pipeline<?, ?> child) {
-		this.parent = (Pipeline<?, Object>) parent;
-		if (child != null) throw new UnsupportedOperationException("Cannot set a child pipeline on a pipe exit point.");
+			final Pipe<?, ?> parent,
+			final Pipe<?, ?> child) {
+		this.parent = (Pipe<?, Object>) parent;
+		if (child != null) throw new UnsupportedOperationException("Cannot set a child pipe on an exit point.");
 	}
 	@Override
 	public Class<Object> getEncodedType() {
@@ -43,7 +43,7 @@ public class PipelineDump implements Pipeline<Object, Boolean> {
 
 	@Override
 	public void writeMessage(final Boolean ignored) {
-		throw new UnsupportedOperationException("Cannot write to a dump pipeline.");
+		throw new UnsupportedOperationException("Cannot write to a dump pipe.");
 	}
 
 

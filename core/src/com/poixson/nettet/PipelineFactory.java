@@ -7,15 +7,15 @@ import java.util.LinkedList;
 import com.poixson.utils.Utils;
 
 
-public abstract class PipelineFactory implements Pipeline<byte[], Boolean> {
+public abstract class PipelineFactory implements Pipe<byte[], Boolean> {
 
-	protected final LinkedList<Pipeline<?, ?>> pipes =
-			new LinkedList<Pipeline<?, ?>>();
+	protected final LinkedList<Pipe<?, ?>> pipes =
+			new LinkedList<Pipe<?, ?>>();
 	private boolean inited = false;
 
 
 
-	public PipelineFactory(final Pipeline<?, ?>...pipes) {
+	public PipelineFactory(final Pipe<?, ?>...pipes) {
 		this();
 		this.addLast(pipes);
 	}
@@ -37,9 +37,9 @@ public abstract class PipelineFactory implements Pipeline<byte[], Boolean> {
 			if (this.pipes.size() == 0) {
 				throw new RuntimeException("No pipes found in pipeline!");
 			}
-			Pipeline<?, ?> lastPipe    = null;
-			Pipeline<?, ?> currentPipe = null;
-			for (final Pipeline<?, ?> nextPipe : this.pipes) {
+			Pipe<?, ?> lastPipe    = null;
+			Pipe<?, ?> currentPipe = null;
+			for (final Pipe<?, ?> nextPipe : this.pipes) {
 				if (currentPipe != null) {
 					currentPipe.setParentChild(
 						lastPipe,
@@ -58,25 +58,25 @@ public abstract class PipelineFactory implements Pipeline<byte[], Boolean> {
 
 
 
-	public PipelineFactory addFirst(final Pipeline<?, ?>...pipes) {
+	public PipelineFactory addFirst(final Pipe<?, ?>...pipes) {
 		if (Utils.isEmpty(pipes))
 			return this;
-		final LinkedList<Pipeline<?, ?>> list =
-			new LinkedList<Pipeline<?, ?>>(
+		final LinkedList<Pipe<?, ?>> list =
+			new LinkedList<Pipe<?, ?>>(
 				Arrays.asList(pipes)
 			);
-		final Iterator<Pipeline<?, ?>> it = list.descendingIterator();
+		final Iterator<Pipe<?, ?>> it = list.descendingIterator();
 		while (it.hasNext()) {
-			final Pipeline<?, ?> pipe = it.next();
+			final Pipe<?, ?> pipe = it.next();
 			if (pipe == null) continue;
 			this.pipes.addFirst(pipe);
 		}
 		return this;
 	}
-	public PipelineFactory addLast(final Pipeline<?, ?>...pipes) {
+	public PipelineFactory addLast(final Pipe<?, ?>...pipes) {
 		if (Utils.isEmpty(pipes))
 			return this;
-		for (final Pipeline<?, ?> pipe : pipes) {
+		for (final Pipe<?, ?> pipe : pipes) {
 			if (pipe == null) continue;
 			this.pipes.addLast(pipe);
 		}
@@ -85,7 +85,7 @@ public abstract class PipelineFactory implements Pipeline<byte[], Boolean> {
 
 
 
-	public static void validate(final Pipeline<?, ?> pipeA, final Pipeline<?, ?> pipeB) {
+	public static void validate(final Pipe<?, ?> pipeA, final Pipe<?, ?> pipeB) {
 //TODO:
 	}
 
@@ -93,8 +93,8 @@ public abstract class PipelineFactory implements Pipeline<byte[], Boolean> {
 
 	@Override
 	public void setParentChild(
-			final Pipeline<?, ?> parent,
-			final Pipeline<?, ?> child) {
+			final Pipe<?, ?> parent,
+			final Pipe<?, ?> child) {
 		throw new UnsupportedOperationException();
 	}
 	@Override
@@ -109,12 +109,12 @@ public abstract class PipelineFactory implements Pipeline<byte[], Boolean> {
 
 
 	@SuppressWarnings("unchecked")
-	public Pipeline<byte[], ?> getEntryPipe() {
-		return (Pipeline<byte[], ?>) this.pipes.getFirst();
+	public Pipe<byte[], ?> getEntryPipe() {
+		return (Pipe<byte[], ?>) this.pipes.getFirst();
 	}
 	@SuppressWarnings("unchecked")
-	public Pipeline<?, Boolean> getExitPipe() {
-		return (Pipeline<?, Boolean>) this.pipes.getLast();
+	public Pipe<?, Boolean> getExitPipe() {
+		return (Pipe<?, Boolean>) this.pipes.getLast();
 	}
 
 
@@ -122,17 +122,17 @@ public abstract class PipelineFactory implements Pipeline<byte[], Boolean> {
 	@Override
 	public void readMessage (final byte[] bytes) {
 		this.init();
-		final Pipeline<byte[], ?> entryPipe =
+		final Pipe<byte[], ?> entryPipe =
 				this.getEntryPipe();
-		if (entryPipe == null) throw new NullPointerException("Failed to get pipeline entry!");
+		if (entryPipe == null) throw new NullPointerException("Failed to get pipe entry point!");
 		entryPipe.readMessage(bytes);
 	}
 	@Override
 	public void writeMessage(final Boolean success) {
 		this.init();
-		final Pipeline<?, Boolean> exitPipe =
+		final Pipe<?, Boolean> exitPipe =
 				this.getExitPipe();
-		if (exitPipe == null) throw new NullPointerException("Failed to get pipeline exit!");
+		if (exitPipe == null) throw new NullPointerException("Failed to get pipe exit point!");
 		exitPipe.writeMessage(success);
 	}
 
