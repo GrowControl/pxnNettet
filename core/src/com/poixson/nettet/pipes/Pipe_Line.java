@@ -1,13 +1,13 @@
-package com.poixson.nettet.pipelines;
+package com.poixson.nettet.pipes;
 
 import com.poixson.utils.StringUtils;
 
 
-public class PipelineLine extends PipelineDelim {
+public class Pipe_Line extends Pipe_Delim {
 
 
 
-	public PipelineLine() {
+	public Pipe_Line() {
 		super("\n");
 	}
 

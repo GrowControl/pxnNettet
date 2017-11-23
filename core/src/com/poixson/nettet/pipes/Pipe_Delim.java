@@ -1,11 +1,11 @@
-package com.poixson.nettet.pipelines;
+package com.poixson.nettet.pipes;
 
 import com.poixson.nettet.Pipe;
 import com.poixson.utils.Utils;
 import com.poixson.utils.xString;
 
 
-public class PipelineDelim implements Pipe<String, String> {
+public class Pipe_Delim implements Pipe<String, String> {
 
 	protected Pipe<?, String> parent = null;
 	protected Pipe<String, ?> child  = null;
@@ -14,7 +14,7 @@ public class PipelineDelim implements Pipe<String, String> {
 
 
 
-	public PipelineDelim(final String delim) {
+	public Pipe_Delim(final String delim) {
 		this.buffer.delim(delim);
 	}
 

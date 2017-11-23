@@ -1,16 +1,16 @@
-package com.poixson.nettet.pipelines;
+package com.poixson.nettet.pipes;
 
 import com.poixson.nettet.Pipe;
 import com.poixson.utils.Dumper;
 
 
-public class PipelineDump implements Pipe<Object, Boolean> {
+public class Pipe_Dump implements Pipe<Object, Boolean> {
 
 	protected Pipe<?, Object>  parent = null;
 
 
 
-	public PipelineDump() {
+	public Pipe_Dump() {
 	}
 
 

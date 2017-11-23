@@ -1,18 +1,18 @@
-package com.poixson.nettet.pipelines;
+package com.poixson.nettet.pipes;
 
 import com.poixson.nettet.Pipe;
 import com.poixson.utils.StringUtils;
 import com.poixson.utils.Utils;
 
 
-public class PipelineString implements Pipe<byte[], String> {
+public class Pipe_String implements Pipe<byte[], String> {
 
 	protected Pipe<?, byte[]> parent = null;
 	protected Pipe<String, ?> child  = null;
 
 
 
-	public PipelineString() {
+	public Pipe_String() {
 	}
 
 

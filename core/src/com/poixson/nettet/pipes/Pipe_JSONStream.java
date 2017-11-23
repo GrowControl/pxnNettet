@@ -1,10 +1,10 @@
-package com.poixson.nettet.pipelines;
+package com.poixson.nettet.pipes;
 
 import com.poixson.nettet.Pipe;
 import com.poixson.utils.Utils;
 
 
-public class PipelineJSONStream implements Pipe<String, Object> {
+public class Pipe_JSONStream implements Pipe<String, Object> {
 
 	protected Pipe<?, String> parent = null;
 	protected Pipe<Object, ?> child  = null;
@@ -28,13 +28,13 @@ public class PipelineJSONStream implements Pipe<String, Object> {
 
 
 
-	public PipelineJSONStream() {
+	public Pipe_JSONStream() {
 		this(MB);
 	}
-	public PipelineJSONStream(final int maxObjectLength) {
+	public Pipe_JSONStream(final int maxObjectLength) {
 		this(maxObjectLength, false);
 	}
-	public PipelineJSONStream(final boolean streamArrayElements) {
+	public Pipe_JSONStream(final boolean streamArrayElements) {
 		this(MB, streamArrayElements);
 	}
 	/**
@@ -44,7 +44,7 @@ public class PipelineJSONStream implements Pipe<String, Object> {
 	 *     passed through the pipeline individually (and immediately after it's fully received,
 	 *     allowing for arrays with infinite elements).
 	 */
-	public PipelineJSONStream(final int maxObjectLength, final boolean streamArrayElements) {
+	public Pipe_JSONStream(final int maxObjectLength, final boolean streamArrayElements) {
 		if (maxObjectLength < 1)
 			throw new IllegalArgumentException("Invalid maxObjectLength value");
 		this.maxObjectLength = maxObjectLength;
