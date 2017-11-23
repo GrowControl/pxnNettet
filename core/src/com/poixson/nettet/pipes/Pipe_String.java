@@ -10,6 +10,9 @@ public class Pipe_String implements Pipe<byte[], String> {
 	protected Pipe<?, byte[]> parent = null;
 	protected Pipe<String, ?> child  = null;
 
+	private long totalRead  = 0;
+	private long totalWrote = 0;
+
 
 
 	public Pipe_String() {
@@ -45,6 +48,7 @@ public class Pipe_String implements Pipe<byte[], String> {
 				bytes,
 				StringUtils.UTF8
 			);
+		this.totalRead += bytes.length;
 		this.child.readMessage(msg);
 	}
 
@@ -55,6 +59,7 @@ public class Pipe_String implements Pipe<byte[], String> {
 		if (Utils.isEmpty(msg))
 			return;
 		final byte[] bytes = msg.getBytes();
+		this.totalWrote += bytes.length;
 		this.parent.writeMessage(bytes);
 	}
 
@@ -67,6 +72,18 @@ public class Pipe_String implements Pipe<byte[], String> {
 	@Override
 	public boolean canWrite() {
 		return true;
+	}
+
+
+
+	// total messages
+	@Override
+	public long getTotalRead() {
+		return this.totalRead;
+	}
+	@Override
+	public long getTotalWrote() {
+		return this.totalWrote;
 	}
 
 

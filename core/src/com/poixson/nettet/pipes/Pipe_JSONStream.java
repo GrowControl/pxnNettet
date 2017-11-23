@@ -26,6 +26,9 @@ public class Pipe_JSONStream implements Pipe<String, Object> {
 	protected boolean insideString = false;
 	protected int     openBraces   = 0;
 
+	private long totalRead  = 0;
+	private long totalWrote = 0;
+
 
 
 	public Pipe_JSONStream() {
@@ -111,6 +114,7 @@ public class Pipe_JSONStream implements Pipe<String, Object> {
 						String data = this.buffer.substring(0, index + 1);
 						this.buffer = buffer.substring(index + 1);
 						final Object json = DecodeJSON(data);
+						this.totalRead++;
 						this.child.readMessage(json);
 						data = "";
 						// reset
@@ -131,6 +135,7 @@ public class Pipe_JSONStream implements Pipe<String, Object> {
 							String data = this.buffer.substring(0, index);
 							this.buffer = buffer.substring(index + 1);
 							final Object json = DecodeJSON(data);
+							this.totalRead++;
 							this.child.readMessage(json);
 							data = "";
 							// reset
@@ -212,6 +217,7 @@ return data;
 
 	@Override
 	public void writeMessage(final Object msg) {
+		this.totalWrote++;
 //TODO:
 	}
 
@@ -231,6 +237,18 @@ return json.toString();
 	@Override
 	public boolean canWrite() {
 		return true;
+	}
+
+
+
+	// total messages
+	@Override
+	public long getTotalRead() {
+		return this.totalRead;
+	}
+	@Override
+	public long getTotalWrote() {
+		return this.totalWrote;
 	}
 
 

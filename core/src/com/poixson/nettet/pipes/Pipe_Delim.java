@@ -12,6 +12,9 @@ public class Pipe_Delim implements Pipe<String, String> {
 
 	protected final xString buffer = xString.get();
 
+	private long totalRead  = 0;
+	private long totalWrote = 0;
+
 
 
 	public Pipe_Delim(final String delim) {
@@ -49,6 +52,7 @@ public class Pipe_Delim implements Pipe<String, String> {
 		while (this.buffer.hasNext()) {
 			final String line = this.buffer.getNext();
 			if (Utils.notEmpty(line)) {
+				this.totalRead++;
 				this.child.readMessage(line);
 			}
 		}
@@ -60,6 +64,7 @@ public class Pipe_Delim implements Pipe<String, String> {
 	public void writeMessage(final String msg) {
 		if (Utils.isEmpty(msg))
 			return;
+		this.totalWrote++;
 		this.parent.writeMessage(
 			this.prepareWriteMessage(msg)
 			+this.buffer.delim()
@@ -84,6 +89,18 @@ public class Pipe_Delim implements Pipe<String, String> {
 	@Override
 	public boolean canWrite() {
 		return true;
+	}
+
+
+
+	// total messages
+	@Override
+	public long getTotalRead() {
+		return this.totalRead;
+	}
+	@Override
+	public long getTotalWrote() {
+		return this.totalWrote;
 	}
 
 

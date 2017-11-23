@@ -17,5 +17,8 @@ public interface Pipe<E, D> { // encoded, decoded
 	public boolean canRead();
 	public boolean canWrite();
 
+	public long getTotalRead();
+	public long getTotalWrote();
+
 
 }

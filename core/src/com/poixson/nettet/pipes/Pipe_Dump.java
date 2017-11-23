@@ -8,6 +8,9 @@ public class Pipe_Dump implements Pipe<Object, Boolean> {
 
 	protected Pipe<?, Object>  parent = null;
 
+	private long totalRead  = 0;
+	private long totalWrote = 0;
+
 
 
 	public Pipe_Dump() {
@@ -36,6 +39,7 @@ public class Pipe_Dump implements Pipe<Object, Boolean> {
 
 	@Override
 	public void readMessage(final Object obj) {
+		this.totalRead++;
 		Dumper.print(obj);
 	}
 
@@ -55,6 +59,18 @@ public class Pipe_Dump implements Pipe<Object, Boolean> {
 	@Override
 	public boolean canWrite() {
 		return false;
+	}
+
+
+
+	// total messages
+	@Override
+	public long getTotalRead() {
+		return this.totalRead;
+	}
+	@Override
+	public long getTotalWrote() {
+		return this.totalWrote;
 	}
 
 
