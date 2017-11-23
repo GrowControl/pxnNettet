@@ -14,5 +14,8 @@ public interface Pipe<E, D> { // encoded, decoded
 	public void readMessage (final E msg);
 	public void writeMessage(final D msg);
 
+	public boolean canRead();
+	public boolean canWrite();
+
 
 }

@@ -48,4 +48,15 @@ public class Pipe_Dump implements Pipe<Object, Boolean> {
 
 
 
+	@Override
+	public boolean canRead() {
+		return true;
+	}
+	@Override
+	public boolean canWrite() {
+		return false;
+	}
+
+
+
 }

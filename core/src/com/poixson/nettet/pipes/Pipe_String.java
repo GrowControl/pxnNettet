@@ -60,4 +60,15 @@ public class Pipe_String implements Pipe<byte[], String> {
 
 
 
+	@Override
+	public boolean canRead() {
+		return true;
+	}
+	@Override
+	public boolean canWrite() {
+		return true;
+	}
+
+
+
 }

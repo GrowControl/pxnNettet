@@ -77,4 +77,15 @@ public class Pipe_Delim implements Pipe<String, String> {
 
 
 
+	@Override
+	public boolean canRead() {
+		return true;
+	}
+	@Override
+	public boolean canWrite() {
+		return true;
+	}
+
+
+
 }

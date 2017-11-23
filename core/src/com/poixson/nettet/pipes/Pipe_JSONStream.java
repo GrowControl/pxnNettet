@@ -224,4 +224,15 @@ return json.toString();
 
 
 
+	@Override
+	public boolean canRead() {
+		return true;
+	}
+	@Override
+	public boolean canWrite() {
+		return true;
+	}
+
+
+
 }
