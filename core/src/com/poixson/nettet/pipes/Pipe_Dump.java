@@ -4,9 +4,10 @@ import com.poixson.nettet.Pipe;
 import com.poixson.utils.Dumper;
 
 
-public class Pipe_Dump implements Pipe<Object, Boolean> {
+public class Pipe_Dump implements Pipe<Object, Object> {
 
-	protected Pipe<?, Object>  parent = null;
+	protected Pipe<?, Object> parent = null;
+	protected Pipe<Object, ?> child = null;
 
 	private long totalRead  = 0;
 	private long totalWrote = 0;
@@ -24,15 +25,15 @@ public class Pipe_Dump implements Pipe<Object, Boolean> {
 			final Pipe<?, ?> parent,
 			final Pipe<?, ?> child) {
 		this.parent = (Pipe<?, Object>) parent;
-		if (child != null) throw new UnsupportedOperationException("Cannot set a child pipe on an exit point.");
+		this.child  = (Pipe<Object, ?>) child;
 	}
 	@Override
 	public Class<Object> getEncodedType() {
 		return Object.class;
 	}
 	@Override
-	public Class<Boolean> getDecodedType() {
-		return Boolean.class;
+	public Class<Object> getDecodedType() {
+		return Object.class;
 	}
 
 
@@ -46,8 +47,9 @@ public class Pipe_Dump implements Pipe<Object, Boolean> {
 
 
 	@Override
-	public void writeMessage(final Boolean ignored) {
-		throw new UnsupportedOperationException("Cannot write to a dump pipe.");
+	public void writeMessage(final Object obj) {
+		this.totalWrote++;
+		Dumper.print(obj);
 	}
 
 
@@ -58,7 +60,7 @@ public class Pipe_Dump implements Pipe<Object, Boolean> {
 	}
 	@Override
 	public boolean canWrite() {
-		return false;
+		return true;
 	}
 
 
