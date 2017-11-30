@@ -1,10 +1,11 @@
 package com.poixson.nettet;
 
+import static com.poixson.nettet.NettetDefines.RANDOM_PORT_HISTORY;
+import static com.poixson.nettet.NettetDefines.RANDOM_PORT_MAX;
+import static com.poixson.nettet.NettetDefines.RANDOM_PORT_MIN;
+
 import com.poixson.utils.HistoryRND;
 import com.poixson.utils.Keeper;
-import static com.poixson.nettet.NettetDefines.RANDOM_PORT_MIN;
-import static com.poixson.nettet.NettetDefines.RANDOM_PORT_MAX;
-import static com.poixson.nettet.NettetDefines.RANDOM_PORT_HISTORY;
 
 
 public final class NettetUtils {
