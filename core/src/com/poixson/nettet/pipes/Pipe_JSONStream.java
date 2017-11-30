@@ -89,10 +89,10 @@ public class Pipe_JSONStream implements Pipe<String, Object> {
 		if (this.buffer.length() + msg.length() > this.maxObjectLength) {
 			throw new RuntimeException(
 				(new StringBuilder())
-				.append("Object length exceeds ")
-				.append(this.maxObjectLength)
-				.append(" max length.")
-				.toString()
+					.append("Object length exceeds ")
+					.append(this.maxObjectLength)
+					.append(" max length.")
+					.toString()
 			);
 		}
 		int indexNew = this.buffer.length();
@@ -166,9 +166,9 @@ public class Pipe_JSONStream implements Pipe<String, Object> {
 					this.state = STATE.CORRUPTED;
 					throw new RuntimeException(
 						(new StringBuilder())
-						.append("Corrupted JSON received: ").append(c)
-						.append(" (").append(Integer.valueOf(c)).append(')')
-						.toString()
+							.append("Corrupted JSON received: ").append(c)
+							.append(" (").append(Integer.valueOf(c)).append(')')
+							.toString()
 					);
 				} // /if state
 				lastC = c;
