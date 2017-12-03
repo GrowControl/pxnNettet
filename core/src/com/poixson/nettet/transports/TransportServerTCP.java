@@ -54,7 +54,7 @@ public class TransportServerTCP extends TransportServer {
 		this.serverChannel.close();
 	}
 	@Override
-	public void CloseAll() {
+	public void closeAll() {
 		Utils.safeClose(this);
 //TODO:
 	}

@@ -24,7 +24,7 @@ public abstract class TransportServer implements Transport, xCloseableMany {
 	public abstract void close() throws IOException;
 
 	@Override
-	public abstract void CloseAll();
+	public abstract void closeAll();
 
 	@Override
 	public abstract boolean isClosed();

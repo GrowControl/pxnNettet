@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(final String[] argsArray) {
 		// process shell arguments
-		final ShellArgsTool argsTool = ShellArgsTool.init(argsArray);
+		final ShellArgsTool argsTool = ShellArgsTool.Init(argsArray);
 
 //		final Pipeline pipeFactory = new Pipeline() {
 //			@Override

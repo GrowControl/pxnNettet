@@ -53,7 +53,7 @@ public class TransportServerUnix extends TransportServer {
 		this.serverSocket.close();
 	}
 	@Override
-	public void CloseAll() {
+	public void closeAll() {
 		Utils.safeClose(this);
 //TODO:
 	}

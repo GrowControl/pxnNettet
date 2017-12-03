@@ -25,7 +25,7 @@ public final class NettetUtils {
 		);
 
 	public static int RandomPort() {
-		return rnd.RND();
+		return rnd.rnd();
 	}
 
 
