@@ -12,7 +12,7 @@ extends LinkedList<Pipe<?, ?>>
 implements Pipe<byte[], Boolean> {
 	private static final long serialVersionUID = 1L;
 
-	private boolean inited = false;
+	private boolean plumbed = false;
 	private final Object plumbedLock = new Object();
 
 
@@ -26,22 +26,26 @@ implements Pipe<byte[], Boolean> {
 
 
 
-	public abstract void doInitPipes();
+	public abstract void setup();
 
 
 
 	public void init() {
-		if (this.inited) return;
-			if (this.inited) return;
+		if (this.plumbed)
+			return;
 		synchronized(this.plumbedLock) {
-			this.inited = true;
-			this.doInitPipes();
+			if (this.plumbed)
+				return;
+			this.plumbed = true;
+			this.setup();
 			if (this.size() == 0) {
 				throw new RuntimeException("No pipes found in pipeline!");
 			}
 			Pipe<?, ?> lastPipe    = null;
 			Pipe<?, ?> currentPipe = null;
-			for (final Pipe<?, ?> nextPipe : this) {
+			final Iterator<Pipe<?, ?>> it = this.iterator();
+			while (it.hasNext()) {
+				final Pipe<?, ?> nextPipe = it.next();
 				if (currentPipe != null) {
 					currentPipe.setParentChild(
 						lastPipe,
@@ -122,7 +126,7 @@ implements Pipe<byte[], Boolean> {
 
 
 	@Override
-	public void readMessage (final byte[] bytes) {
+	public void readMessage(final byte[] bytes) {
 		this.init();
 		final Pipe<byte[], ?> entryPipe =
 				this.getEntryPipe();
