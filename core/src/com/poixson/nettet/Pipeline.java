@@ -7,11 +7,13 @@ import java.util.LinkedList;
 import com.poixson.utils.Utils;
 
 
-public abstract class Pipeline implements Pipe<byte[], Boolean> {
+public abstract class Pipeline
+extends LinkedList<Pipe<?, ?>>
+implements Pipe<byte[], Boolean> {
+	private static final long serialVersionUID = 1L;
 
-	protected final LinkedList<Pipe<?, ?>> pipes =
-			new LinkedList<Pipe<?, ?>>();
 	private boolean inited = false;
+	private final Object plumbedLock = new Object();
 
 
 
@@ -30,16 +32,16 @@ public abstract class Pipeline implements Pipe<byte[], Boolean> {
 
 	public void init() {
 		if (this.inited) return;
-		synchronized(this.pipes) {
 			if (this.inited) return;
+		synchronized(this.plumbedLock) {
 			this.inited = true;
 			this.doInitPipes();
-			if (this.pipes.size() == 0) {
+			if (this.size() == 0) {
 				throw new RuntimeException("No pipes found in pipeline!");
 			}
 			Pipe<?, ?> lastPipe    = null;
 			Pipe<?, ?> currentPipe = null;
-			for (final Pipe<?, ?> nextPipe : this.pipes) {
+			for (final Pipe<?, ?> nextPipe : this) {
 				if (currentPipe != null) {
 					currentPipe.setParentChild(
 						lastPipe,
@@ -69,7 +71,7 @@ public abstract class Pipeline implements Pipe<byte[], Boolean> {
 		while (it.hasNext()) {
 			final Pipe<?, ?> pipe = it.next();
 			if (pipe == null) continue;
-			this.pipes.addFirst(pipe);
+			this.addFirst(pipe);
 		}
 		return this;
 	}
@@ -78,7 +80,7 @@ public abstract class Pipeline implements Pipe<byte[], Boolean> {
 			return this;
 		for (final Pipe<?, ?> pipe : pipes) {
 			if (pipe == null) continue;
-			this.pipes.addLast(pipe);
+			this.addLast(pipe);
 		}
 		return this;
 	}
@@ -110,11 +112,11 @@ public abstract class Pipeline implements Pipe<byte[], Boolean> {
 
 	@SuppressWarnings("unchecked")
 	public Pipe<byte[], ?> getEntryPipe() {
-		return (Pipe<byte[], ?>) this.pipes.getFirst();
+		return (Pipe<byte[], ?>) this.getFirst();
 	}
 	@SuppressWarnings("unchecked")
 	public Pipe<?, Boolean> getExitPipe() {
-		return (Pipe<?, Boolean>) this.pipes.getLast();
+		return (Pipe<?, Boolean>) this.getLast();
 	}
 
 
