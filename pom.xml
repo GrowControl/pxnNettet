@@ -32,6 +32,7 @@
 	<modules>
 		<module>core</module>
 		<module>demo</module>
+		<module>tool</module>
 	</modules>
 	<build>
 		<defaultGoal>install</defaultGoal>
