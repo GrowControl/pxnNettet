@@ -23,7 +23,7 @@ public class TransportClientUnix extends TransportClient {
 	public TransportClientUnix(final String socketPath)
 			throws IOException {
 		super();
-		if (Utils.isEmpty(socketPath)) throw new RequiredArgumentException("socketPath");
+		if (Utils.isEmpty(socketPath)) throw RequiredArgumentException.getNew("socketPath");
 		this.socketPath = socketPath;
 		this.socketFile = new File(socketPath);
 		this.socket  = AFUNIXSocket.newInstance();

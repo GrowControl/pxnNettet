@@ -112,7 +112,7 @@ public class Pipe_JSONStream implements Pipe<String, Object> {
 					// all braces/brackets have been closed, assume json is finished
 					if (this.openBraces == 0) {
 						String data = this.buffer.substring(0, index + 1);
-						this.buffer = buffer.substring(index + 1);
+						this.buffer = this.buffer.substring(index + 1);
 						final Object json = DecodeJSON(data);
 						this.totalRead++;
 						this.child.readMessage(json);
@@ -133,7 +133,7 @@ public class Pipe_JSONStream implements Pipe<String, Object> {
 						if ( (this.openBraces == 1 && c == ',')
 						||   (this.openBraces == 0 && c == ']') ) {
 							String data = this.buffer.substring(0, index);
-							this.buffer = buffer.substring(index + 1);
+							this.buffer = this.buffer.substring(index + 1);
 							final Object json = DecodeJSON(data);
 							this.totalRead++;
 							this.child.readMessage(json);

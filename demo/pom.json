@@ -28,6 +28,7 @@
 		"nettet": {
 			"GroupId": "com.poixson.nettet",
 			"ArtifactId": "nettet",
+			"Name": "pxnNettet",
 			"Version": "1.0.0"
 		}
 	}

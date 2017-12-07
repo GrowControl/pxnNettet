@@ -29,7 +29,7 @@ public class TransportServerTCP extends TransportServer {
 	public TransportServerTCP(final SocketAddress listenAddress)
 			throws IOException {
 		super();
-		if (listenAddress == null) throw new RequiredArgumentException("listenAddress");
+		if (listenAddress == null) throw RequiredArgumentException.getNew("listenAddress");
 		this.listenAddress = listenAddress;
 		this.serverChannel = ServerSocketChannel.open();
 		this.serverSocket  = this.serverChannel.socket();

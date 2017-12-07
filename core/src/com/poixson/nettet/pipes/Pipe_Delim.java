@@ -10,7 +10,7 @@ public class Pipe_Delim implements Pipe<String, String> {
 	protected Pipe<?, String> parent = null;
 	protected Pipe<String, ?> child  = null;
 
-	protected final xString buffer = xString.get();
+	protected final xString buffer = xString.getNew();
 
 	private long totalRead  = 0;
 	private long totalWrote = 0;
