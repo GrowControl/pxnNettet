@@ -9,6 +9,7 @@ import java.util.concurrent.FutureTask;
 import javax.swing.SwingUtilities;
 
 import com.poixson.app.gui.xWindow;
+import com.poixson.utils.xLogger.xLog;
 
 
 public class ToolWindow extends xWindow {
@@ -32,9 +33,11 @@ public class ToolWindow extends xWindow {
 		try {
 			return future.get();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			xLog.getRoot()
+				.trace(e);
 		} catch (ExecutionException e) {
-			e.printStackTrace();
+			xLog.getRoot()
+				.trace(e);
 		}
 		return null;
 	}
@@ -46,6 +49,8 @@ public class ToolWindow extends xWindow {
 		// layout manager
 		final LayoutManager layout = null;
 		this.setLayout(layout);
+		ToolApp.get()
+			.register(this);
 	}
 
 

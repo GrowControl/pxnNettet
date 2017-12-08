@@ -1,33 +1,27 @@
 package com.poixson.nettet.demo;
 
-import com.poixson.utils.ErrorMode;
+import com.poixson.nettet.NettetLibraryLoader;
 import com.poixson.utils.Keeper;
-import com.poixson.utils.NativeAutoLoader;
-import com.poixson.utils.ShellArgsTool;
 
 
 public class Main {
 
+	// keep things in memory
 	@SuppressWarnings("unused")
 	private static final Keeper keeper = Keeper.get();
 
 
 
 	public static void main(final String[] argsArray) {
-		// process shell arguments
-		@SuppressWarnings("unused")
-		final ShellArgsTool argsTool = ShellArgsTool.Init(argsArray);
-		// load unix socket library
+//TODO:
+//		// process shell arguments
+//		@SuppressWarnings("unused")
+//		final ShellArgsTool argsTool = ShellArgsTool.Init(argsArray);
+		// load libraries
 		{
-			final NativeAutoLoader loader =
-				NativeAutoLoader.getNew()
-					.addDefaultSearchPaths()
-					.enableExtract()
-					.enableReplace()
-					.setClassRef(Main.class)
-					.setErrorMode(ErrorMode.EXCEPTION);
-			loader.setFileName("libjunixsocket-native-1.0.2")
-				.load();
+			// load unix socket library
+			NettetLibraryLoader.get()
+				.loadUnixSocketLibrary();
 		}
 	}
 
@@ -42,13 +36,8 @@ public class Main {
 //					new PipelineDump()
 //				);
 //			}
-		};
+//		};
 //		pipeFactory.init();
-//TODO:
-
-
-
-//	}
 
 
 

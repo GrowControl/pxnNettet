@@ -1,16 +1,25 @@
 package com.poixson.nettet.tool;
 
 import com.poixson.nettet.NettetLibraryLoader;
-import com.poixson.nettet.tool.gui.ToolWindow;
-import com.poixson.utils.ShellArgsTool;
+import com.poixson.nettet.tool.gui.ToolApp;
 import com.poixson.serial.SerialLibraryLoader;
+import com.poixson.utils.Keeper;
 
 
 public class Main {
 
+	// keep things in memory
+	@SuppressWarnings("unused")
+	private static final Keeper keeper = Keeper.get();
+
+	private static ToolApp app = null;
+
 
 
 	public static void main(final String[] argsArray) {
+//TODO:
+//		// process shell arguments
+//		final ShellArgsTool argsTool = ShellArgsTool.Init(argsArray);
 		// load libraries
 		{
 			// load unix socket library
@@ -25,11 +34,8 @@ public class Main {
 			// load d2xx prop library
 			loader.loadD2xxPropLibrary();
 		}
-		// process shell arguments
-		@SuppressWarnings("unused")
-		final ShellArgsTool argsTool = ShellArgsTool.Init(argsArray);
-		final ToolWindow toolWin = ToolWindow.getNew();
-		toolWin.showFocused();
+		app = new ToolApp();
+		app.start();
 	}
 
 
