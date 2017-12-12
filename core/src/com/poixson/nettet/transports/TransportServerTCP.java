@@ -39,7 +39,7 @@ public class TransportServerTCP extends TransportServer {
 
 
 	@Override
-	public void Bind() throws IOException {
+	public void bind() throws IOException {
 		final SocketAddress listenAddress = this.listenAddress;
 		final int backlog = this.getBacklog();
 		final int timeout = this.getTimeout();

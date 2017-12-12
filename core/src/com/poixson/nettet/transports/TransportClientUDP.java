@@ -77,7 +77,7 @@ public class TransportClientUDP extends TransportClient {
 
 
 	@Override
-	public void Connect() throws IOException {
+	public void connect() throws IOException {
 		throw new UnsupportedOperationException();
 	}
 

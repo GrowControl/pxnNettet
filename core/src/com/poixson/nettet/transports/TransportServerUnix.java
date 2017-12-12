@@ -35,7 +35,7 @@ public class TransportServerUnix extends TransportServer {
 
 
 	@Override
-	public void Bind() throws IOException {
+	public void bind() throws IOException {
 		final AFUNIXSocketAddress addr = new AFUNIXSocketAddress(this.listenFile);
 		final int backlog = this.getBacklog();
 //		final int timeout = this.getTimeout();

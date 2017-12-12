@@ -14,7 +14,7 @@ public abstract class TransportClient implements Transport, xCloseable {
 
 
 
-	public abstract void Connect() throws IOException;
+	public abstract void connect() throws IOException;
 
 	@Override
 	public abstract void close() throws IOException;

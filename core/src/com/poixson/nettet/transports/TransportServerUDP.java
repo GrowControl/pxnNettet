@@ -39,7 +39,7 @@ public class TransportServerUDP extends TransportServer {
 
 
 	@Override
-	public void Bind() throws IOException {
+	public void bind() throws IOException {
 		final DatagramSocket socket = this.serverChannel.socket();
 		final SocketAddress listenAddress = this.listenAddress;
 		final int timeout = this.getTimeout();

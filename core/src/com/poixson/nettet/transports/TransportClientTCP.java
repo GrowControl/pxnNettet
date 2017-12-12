@@ -77,7 +77,7 @@ public class TransportClientTCP extends TransportClient {
 
 
 	@Override
-	public void Connect() throws IOException {
+	public void connect() throws IOException {
 		final InetSocketAddress localAddr  = this.localAddr;
 		final InetSocketAddress remoteAddr = this.remoteAddr;
 		if (localAddr != null) {
