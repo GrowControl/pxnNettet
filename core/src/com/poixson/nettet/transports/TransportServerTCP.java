@@ -13,8 +13,7 @@ import com.poixson.utils.exceptions.RequiredArgumentException;
 
 public class TransportServerTCP extends TransportServer {
 
-	protected final ServerSocketChannel serverChannel;
-	protected final ServerSocket        serverSocket;
+	protected final ServerSocketChannel nioServerChannel;
 
 	protected final SocketAddress listenAddress;
 
@@ -31,9 +30,17 @@ public class TransportServerTCP extends TransportServer {
 		super();
 		if (listenAddress == null) throw RequiredArgumentException.getNew("listenAddress");
 		this.listenAddress = listenAddress;
-		this.serverChannel = ServerSocketChannel.open();
-		this.serverSocket  = this.serverChannel.socket();
-		this.serverChannel.configureBlocking(false);
+		this.nioServerChannel = ServerSocketChannel.open();
+		this.nioServerChannel.configureBlocking(false);
+	}
+
+
+
+	public ServerSocketChannel getChannel() {
+		return this.nioServerChannel;
+	}
+	public ServerSocket getSocket() {
+		return this.nioServerChannel.socket();
 	}
 
 
@@ -43,15 +50,16 @@ public class TransportServerTCP extends TransportServer {
 		final SocketAddress listenAddress = this.listenAddress;
 		final int backlog = this.getBacklog();
 		final int timeout = this.getTimeout();
-		this.serverSocket.setSoTimeout(timeout);
-		this.serverSocket.bind(listenAddress, backlog);
+		final ServerSocket socket = this.getSocket();
+		socket.setSoTimeout(timeout);
+		socket.bind(listenAddress, backlog);
 	}
 
 
 
 	@Override
 	public void close() throws IOException {
-		this.serverChannel.close();
+		this.nioServerChannel.close();
 	}
 	@Override
 	public void closeAll() {
@@ -62,13 +70,16 @@ public class TransportServerTCP extends TransportServer {
 
 
 	@Override
-	public boolean isClosed() {
-		return ! this.serverChannel.isOpen();
+	public boolean isListening() {
+		return this.nioServerChannel.isOpen();
 	}
 	@Override
-	public boolean isListening() {
-		return this.serverChannel.isOpen();
+	public boolean isClosed() {
+		return ! this.nioServerChannel.isOpen();
 	}
+
+
+
 	@Override
 	public int countConnected() {
 //TODO:
@@ -89,7 +100,8 @@ return -1;
 			return null;
 		if (this.isListening()) {
 			try {
-				this.serverSocket.setSoTimeout(timeout);
+				this.getSocket()
+					.setSoTimeout(timeout);
 			} catch (SocketException ignore) {}
 		}
 		return this;

@@ -14,9 +14,7 @@ import com.poixson.utils.exceptions.RequiredArgumentException;
 // https://github.com/fiken/junixsocket
 public class TransportServerUnix extends TransportServer {
 
-	protected final AFUNIXServerSocket  serverSocket;
-//	protected final ServerSocketChannel serverChannel;
-//	protected ServerSocketChannel serverChannel = null;
+	protected final AFUNIXServerSocket afServerSocket;
 
 	protected final String listenPath;
 	protected final File   listenFile;
@@ -29,7 +27,13 @@ public class TransportServerUnix extends TransportServer {
 		if (Utils.isEmpty(listenPath)) throw RequiredArgumentException.getNew("listenPath");
 		this.listenPath = listenPath;
 		this.listenFile = new File(listenPath);
-		this.serverSocket  = AFUNIXServerSocket.newInstance();
+		this.afServerSocket = AFUNIXServerSocket.newInstance();
+	}
+
+
+
+	public AFUNIXServerSocket getSocket() {
+		return this.afServerSocket;
 	}
 
 
@@ -38,19 +42,16 @@ public class TransportServerUnix extends TransportServer {
 	public void bind() throws IOException {
 		final AFUNIXSocketAddress addr = new AFUNIXSocketAddress(this.listenFile);
 		final int backlog = this.getBacklog();
-//		final int timeout = this.getTimeout();
-//		this.serverSocket.setSoTimeout(timeout);
-		this.serverSocket.bind(addr, backlog);
-//TODO: remove this?
-//		this.serverChannel = this.serverSocket.getChannel();
-//		this.serverChannel.configureBlocking(false);
+		final int timeout = this.getTimeout();
+		this.afServerSocket.setSoTimeout(timeout);
+		this.afServerSocket.bind(addr, backlog);
 	}
 
 
 
 	@Override
 	public void close() throws IOException {
-		this.serverSocket.close();
+		this.afServerSocket.close();
 	}
 	@Override
 	public void closeAll() {
@@ -61,14 +62,17 @@ public class TransportServerUnix extends TransportServer {
 
 
 	@Override
-	public boolean isClosed() {
-		return this.serverSocket.isClosed();
-	}
-	@Override
 	public boolean isListening() {
 //TODO: is this right?
-		return this.serverSocket.isBound();
+		return this.afServerSocket.isBound();
 	}
+	@Override
+	public boolean isClosed() {
+		return this.afServerSocket.isClosed();
+	}
+
+
+
 	@Override
 	public int countConnected() {
 //TODO:
@@ -89,7 +93,7 @@ return -1;
 			return null;
 		if (this.isListening()) {
 			try {
-				this.serverSocket.setSoTimeout(timeout);
+				this.afServerSocket.setSoTimeout(timeout);
 			} catch (SocketException ignore) {}
 		}
 		return this;

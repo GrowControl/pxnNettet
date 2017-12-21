@@ -13,8 +13,7 @@ import com.poixson.utils.exceptions.RequiredArgumentException;
 
 public class TransportServerUDP extends TransportServer {
 
-	protected final DatagramChannel serverChannel;
-	protected final DatagramSocket  serverSocket;
+	protected final DatagramChannel nioServerChannel;
 
 	protected final SocketAddress listenAddress;
 
@@ -31,18 +30,26 @@ public class TransportServerUDP extends TransportServer {
 		super();
 		if (listenAddress == null) throw RequiredArgumentException.getNew("listenAddress");
 		this.listenAddress = listenAddress;
-		this.serverChannel = DatagramChannel.open();
-		this.serverSocket  = this.serverChannel.socket();
-		this.serverChannel.configureBlocking(false);
+		this.nioServerChannel = DatagramChannel.open();
+		this.nioServerChannel.configureBlocking(false);
+	}
+
+
+
+	public DatagramChannel getChannel() {
+		return this.nioServerChannel;
+	}
+	public DatagramSocket getSocket() {
+		return this.nioServerChannel.socket();
 	}
 
 
 
 	@Override
 	public void bind() throws IOException {
-		final DatagramSocket socket = this.serverChannel.socket();
 		final SocketAddress listenAddress = this.listenAddress;
 		final int timeout = this.getTimeout();
+		final DatagramSocket socket = this.getSocket();
 		socket.setSoTimeout(timeout);
 		socket.bind(listenAddress);
 	}
@@ -51,7 +58,7 @@ public class TransportServerUDP extends TransportServer {
 
 	@Override
 	public void close() throws IOException {
-		this.serverChannel.close();
+		this.nioServerChannel.close();
 	}
 	@Override
 	public void closeAll() {
@@ -62,13 +69,16 @@ public class TransportServerUDP extends TransportServer {
 
 
 	@Override
-	public boolean isClosed() {
-		return ! this.serverChannel.isOpen();
+	public boolean isListening() {
+		return this.nioServerChannel.isOpen();
 	}
 	@Override
-	public boolean isListening() {
-		return this.serverChannel.isOpen();
+	public boolean isClosed() {
+		return ! this.nioServerChannel.isOpen();
 	}
+
+
+
 	@Override
 	public int countConnected() {
 //TODO:
@@ -91,7 +101,7 @@ return -1;
 			return null;
 		if (this.isListening()) {
 			try {
-				this.serverChannel.socket()
+				this.nioServerChannel.socket()
 					.setSoTimeout(timeout);
 			} catch (SocketException ignore) {}
 		}

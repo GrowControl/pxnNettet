@@ -12,8 +12,7 @@ import com.poixson.utils.exceptions.RequiredArgumentException;
 
 public class TransportClientUnix extends TransportClient {
 
-	protected final AFUNIXSocket  socket;
-//	protected final SocketChannel channel;
+	protected final AFUNIXSocket afSocket;
 
 	protected final String socketPath;
 	protected final File   socketFile;
@@ -26,10 +25,13 @@ public class TransportClientUnix extends TransportClient {
 		if (Utils.isEmpty(socketPath)) throw RequiredArgumentException.getNew("socketPath");
 		this.socketPath = socketPath;
 		this.socketFile = new File(socketPath);
-		this.socket  = AFUNIXSocket.newInstance();
-//TODO: remove this?
-//		this.channel = this.socket.getChannel();
-//		this.channel.configureBlocking(false);
+		this.afSocket = AFUNIXSocket.newInstance();
+	}
+
+
+
+	public AFUNIXSocket getSocket() {
+		return this.afSocket;
 	}
 
 
@@ -37,25 +39,22 @@ public class TransportClientUnix extends TransportClient {
 	@Override
 	public void connect() throws IOException {
 		final AFUNIXSocketAddress addr = new AFUNIXSocketAddress(this.socketFile);
-		this.socket.connect(addr, 1000);
+		this.afSocket.connect(addr, 1000);
 	}
-
-
-
 	@Override
 	public void close() throws IOException {
-		this.socket.close();
+		this.afSocket.close();
 	}
 
 
 
-	@Override
-	public boolean isClosed() {
-		return this.socket.isClosed();
-	}
 	@Override
 	public boolean isConnected() {
-		return this.socket.isConnected();
+		return this.afSocket.isConnected();
+	}
+	@Override
+	public boolean isClosed() {
+		return this.afSocket.isClosed();
 	}
 
 

@@ -12,8 +12,7 @@ import com.poixson.utils.exceptions.RequiredArgumentException;
 
 public class TransportClientTCP extends TransportClient {
 
-	protected final SocketChannel channel;
-	protected final Socket        socket;
+	protected final SocketChannel nioChannel;
 
 	protected final InetSocketAddress localAddr;
 	protected final InetSocketAddress remoteAddr;
@@ -36,17 +35,16 @@ public class TransportClientTCP extends TransportClient {
 			throws IOException {
 		super();
 		if (Utils.isEmpty(remoteAddrStr)) throw RequiredArgumentException.getNew("remoteAddrStr");
-		if (localPort  <= 0) throw RequiredArgumentException.getNew("localPort");
-		if (remotePort <= 0) throw RequiredArgumentException.getNew("remotePort");
+		if (localPort  <= 0)              throw RequiredArgumentException.getNew("localPort");
+		if (remotePort <= 0)              throw RequiredArgumentException.getNew("remotePort");
 		this.localAddr = (
 			Utils.isEmpty(localAddrStr)
 			? new InetSocketAddress(localPort)
 			: new InetSocketAddress(localAddrStr, localPort)
 		);
 		this.remoteAddr = new InetSocketAddress(remoteAddrStr, remotePort);
-		this.channel = SocketChannel.open();
-		this.socket  = this.channel.socket();
-		this.channel.configureBlocking(false);
+		this.nioChannel = SocketChannel.open();
+		this.nioChannel.configureBlocking(false);
 	}
 	// inet
 	public TransportClientTCP(
@@ -63,15 +61,23 @@ public class TransportClientTCP extends TransportClient {
 			throws IOException {
 		super();
 		if (remoteAddr == null) throw RequiredArgumentException.getNew("remoteAddr");
-		this.localAddr  = (
+		this.localAddr = (
 			localAddr == null
 			? new InetSocketAddress(NettetDefines.RandomPort())
 			: localAddr
 		);
 		this.remoteAddr = remoteAddr;
-		this.channel = SocketChannel.open();
-		this.socket  = this.channel.socket();
-		this.channel.configureBlocking(false);
+		this.nioChannel = SocketChannel.open();
+		this.nioChannel.configureBlocking(false);
+	}
+
+
+
+	public SocketChannel getChannel() {
+		return this.nioChannel;
+	}
+	public Socket getSocket() {
+		return this.nioChannel.socket();
 	}
 
 
@@ -81,27 +87,24 @@ public class TransportClientTCP extends TransportClient {
 		final InetSocketAddress localAddr  = this.localAddr;
 		final InetSocketAddress remoteAddr = this.remoteAddr;
 		if (localAddr != null) {
-			this.channel.bind(localAddr);
+			this.nioChannel.bind(localAddr);
 		}
-		this.channel.connect(remoteAddr);
+		this.nioChannel.connect(remoteAddr);
 	}
-
-
-
 	@Override
 	public void close() throws IOException {
-		this.channel.close();
+		this.nioChannel.close();
 	}
 
 
 
-	@Override
-	public boolean isClosed() {
-		return ! this.channel.isOpen();
-	}
 	@Override
 	public boolean isConnected() {
-		return this.channel.isConnected();
+		return this.nioChannel.isConnected();
+	}
+	@Override
+	public boolean isClosed() {
+		return ! this.nioChannel.isOpen();
 	}
 
 
