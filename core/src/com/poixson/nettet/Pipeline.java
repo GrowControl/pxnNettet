@@ -114,6 +114,27 @@ implements Pipe<byte[], Boolean> {
 
 
 
+	@Override
+	public boolean canRead() {
+		return true;
+	}
+	@Override
+	public boolean canWrite() {
+		return true;
+	}
+	@Override
+	public long getTotalRead() {
+//TODO:
+return 0;
+	}
+	@Override
+	public long getTotalWrote() {
+//TODO:
+return 0;
+	}
+
+
+
 	@SuppressWarnings("unchecked")
 	public Pipe<byte[], ?> getEntryPipe() {
 		return (Pipe<byte[], ?>) this.getFirst();
