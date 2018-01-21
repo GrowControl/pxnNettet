@@ -24,7 +24,7 @@ public class TransportServerUnix extends TransportServer {
 	public TransportServerUnix(final String listenPath)
 			throws IOException {
 		super();
-		if (Utils.isEmpty(listenPath)) throw RequiredArgumentException.getNew("listenPath");
+		if (Utils.isEmpty(listenPath)) throw new RequiredArgumentException("listenPath");
 		this.listenPath = listenPath;
 		this.listenFile = new File(listenPath);
 		this.afServerSocket = AFUNIXServerSocket.newInstance();

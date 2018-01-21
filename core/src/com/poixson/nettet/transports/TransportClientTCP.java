@@ -34,9 +34,9 @@ public class TransportClientTCP extends TransportClient {
 			final String remoteAddrStr, final int remotePort)
 			throws IOException {
 		super();
-		if (Utils.isEmpty(remoteAddrStr)) throw RequiredArgumentException.getNew("remoteAddrStr");
-		if (localPort  <= 0)              throw RequiredArgumentException.getNew("localPort");
-		if (remotePort <= 0)              throw RequiredArgumentException.getNew("remotePort");
+		if (Utils.isEmpty(remoteAddrStr)) throw new RequiredArgumentException("remoteAddrStr");
+		if (localPort  <= 0)              throw new RequiredArgumentException("localPort");
+		if (remotePort <= 0)              throw new RequiredArgumentException("remotePort");
 		this.localAddr = (
 			Utils.isEmpty(localAddrStr)
 			? new InetSocketAddress(localPort)
@@ -60,7 +60,7 @@ public class TransportClientTCP extends TransportClient {
 			final InetSocketAddress remoteAddr)
 			throws IOException {
 		super();
-		if (remoteAddr == null) throw RequiredArgumentException.getNew("remoteAddr");
+		if (remoteAddr == null) throw new RequiredArgumentException("remoteAddr");
 		this.localAddr = (
 			localAddr == null
 			? new InetSocketAddress(NettetDefines.RandomPort())

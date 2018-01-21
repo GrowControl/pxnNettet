@@ -28,7 +28,7 @@ public class TransportServerTCP extends TransportServer {
 	public TransportServerTCP(final SocketAddress listenAddress)
 			throws IOException {
 		super();
-		if (listenAddress == null) throw RequiredArgumentException.getNew("listenAddress");
+		if (listenAddress == null) throw new RequiredArgumentException("listenAddress");
 		this.listenAddress = listenAddress;
 		this.nioServerChannel = ServerSocketChannel.open();
 		this.nioServerChannel.configureBlocking(false);
