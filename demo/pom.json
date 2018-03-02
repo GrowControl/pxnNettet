@@ -9,6 +9,18 @@
 	"Main-Class": "com.poixson.nettet.demo.Main",
 	"Shade": "yes",
 	"Deps": {
+		"pxnCommon-Core": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-core",
+			"Name": "pxnCommon-Core",
+			"Version": "3.6.2"
+		},
+		"nettet": {
+			"GroupId": "com.poixson.nettet",
+			"ArtifactId": "nettet",
+			"Name": "pxnNettet",
+			"Version": "1.0.0"
+		},
 		"jUnixSocket": {
 			"GroupId": "no.fiken.oss.junixsocket",
 			"ArtifactId": "junixsocket-common",
@@ -18,18 +30,6 @@
 			"GroupId": "no.fiken.oss.junixsocket",
 			"ArtifactId": "junixsocket-native-common",
 			"Version": "1.0.2"
-		},
-		"pxnCommon": {
-			"GroupId": "com.poixson",
-			"ArtifactId": "common",
-			"Name": "pxnCommon",
-			"Version": "3.6.1"
-		},
-		"nettet": {
-			"GroupId": "com.poixson.nettet",
-			"ArtifactId": "nettet",
-			"Name": "pxnNettet",
-			"Version": "1.0.0"
 		}
 	}
 }
