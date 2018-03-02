@@ -1,6 +1,6 @@
 package com.poixson.nettet;
 
-import com.poixson.utils.HistoryRND;
+import com.poixson.tools.HistoryRND;
 
 
 public final class NettetDefines {

@@ -5,9 +5,9 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.nio.channels.DatagramChannel;
 
+import com.poixson.exceptions.RequiredArgumentException;
 import com.poixson.nettet.NettetDefines;
 import com.poixson.utils.Utils;
-import com.poixson.utils.exceptions.RequiredArgumentException;
 
 
 public class TransportClientUDP extends TransportClient {

@@ -46,7 +46,7 @@ public class Pipe_String implements Pipe<byte[], String> {
 		final String msg =
 			new String(
 				bytes,
-				StringUtils.UTF8
+				StringUtils.CHARSET_UTF8
 			);
 		this.totalRead += bytes.length;
 		this.child.readMessage(msg);

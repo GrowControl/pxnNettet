@@ -5,9 +5,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.channels.SocketChannel;
 
+import com.poixson.exceptions.RequiredArgumentException;
 import com.poixson.nettet.NettetDefines;
 import com.poixson.utils.Utils;
-import com.poixson.utils.exceptions.RequiredArgumentException;
 
 
 public class TransportClientTCP extends TransportClient {

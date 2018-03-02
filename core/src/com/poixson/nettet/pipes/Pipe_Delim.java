@@ -1,8 +1,8 @@
 package com.poixson.nettet.pipes;
 
 import com.poixson.nettet.Pipe;
+import com.poixson.tools.xString;
 import com.poixson.utils.Utils;
-import com.poixson.utils.xString;
 
 
 public class Pipe_Delim implements Pipe<String, String> {

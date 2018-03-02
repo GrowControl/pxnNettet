@@ -7,8 +7,8 @@ import java.net.SocketAddress;
 import java.net.SocketException;
 import java.nio.channels.DatagramChannel;
 
+import com.poixson.exceptions.RequiredArgumentException;
 import com.poixson.utils.Utils;
-import com.poixson.utils.exceptions.RequiredArgumentException;
 
 
 public class TransportServerUDP extends TransportServer {

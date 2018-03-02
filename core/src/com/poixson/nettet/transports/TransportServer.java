@@ -2,8 +2,8 @@ package com.poixson.nettet.transports;
 
 import java.io.IOException;
 
+import com.poixson.abstractions.xCloseableMany;
 import com.poixson.nettet.NettetDefines;
-import com.poixson.utils.xCloseableMany;
 
 
 public abstract class TransportServer implements Transport, xCloseableMany {

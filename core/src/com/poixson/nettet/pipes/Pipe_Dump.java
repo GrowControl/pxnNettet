@@ -1,7 +1,7 @@
 package com.poixson.nettet.pipes;
 
 import com.poixson.nettet.Pipe;
-import com.poixson.utils.Dumper;
+import com.poixson.tools.Dumper;
 
 
 public class Pipe_Dump implements Pipe<Object, Object> {

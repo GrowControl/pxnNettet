@@ -6,8 +6,8 @@ import java.io.IOException;
 import org.newsclub.net.unix.AFUNIXSocket;
 import org.newsclub.net.unix.AFUNIXSocketAddress;
 
+import com.poixson.exceptions.RequiredArgumentException;
 import com.poixson.utils.Utils;
-import com.poixson.utils.exceptions.RequiredArgumentException;
 
 
 public class TransportClientUnix extends TransportClient {
