@@ -1,8 +1,8 @@
 package com.poixson.nettet.demo;
 
-import com.poixson.utils.Keeper;
-import com.poixson.utils.NativeAutoLoader;
-import com.poixson.utils.NativeAutoLoader.AutoMode;
+import com.poixson.tools.Keeper;
+import com.poixson.tools.NativeAutoLoader;
+import com.poixson.tools.NativeAutoLoader.AutoMode;
 
 
 public class Main {
