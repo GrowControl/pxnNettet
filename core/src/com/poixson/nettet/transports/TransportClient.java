@@ -12,10 +12,8 @@ public abstract class TransportClient implements Transport {
 
 
 
-	public abstract void connect() throws IOException;
-	@Override
-	public void open() throws IOException {
-		this.connect();
+	public void connect() throws IOException {
+		this.open();
 	}
 
 

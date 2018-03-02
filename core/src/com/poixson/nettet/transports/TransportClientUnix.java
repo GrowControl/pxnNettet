@@ -37,7 +37,7 @@ public class TransportClientUnix extends TransportClient {
 
 
 	@Override
-	public void connect() throws IOException {
+	public void open() throws IOException {
 		final AFUNIXSocketAddress addr = new AFUNIXSocketAddress(this.socketFile);
 		this.afSocket.connect(addr, 1000);
 	}

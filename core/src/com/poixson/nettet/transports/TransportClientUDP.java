@@ -83,7 +83,7 @@ public class TransportClientUDP extends TransportClient {
 
 
 	@Override
-	public void connect() {
+	public void open() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
